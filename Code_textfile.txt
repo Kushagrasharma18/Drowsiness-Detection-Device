@@ -1,0 +1,50 @@
+﻿//Tinkering Project
+//Drowsiness Detection System
+//Group-2(Het , Nikhil , Priyanshu , Khushboo ,Nandini and Kushagra)
+
+
+//Code embedded in the Arduino 
+
+
+int flag=0;// creating an int variable to change according to activation of sensor
+int t1=0;   // creating an int variable to store time for which sensor is activated
+int t2=0;  // creating an int variable to store time for which sensor is not activated
+int buzzerpin=7; //assigning an int variable for output (buzzing)
+int sensorpin=2; //assigning an int variable for input (sensing sensor activation)
+void setup()    //in void setup we make the selected pins input or output 
+{
+  Serial.begin(9600);
+  pinMode(buzzerpin,OUTPUT);
+  pinMode(sensorpin,INPUT);
+
+
+}
+void loop() 
+{
+  int x=digitalRead(sensorpin); 
+// x changes to 1 or 0 as sensor got activated or is  not activated
+  Serial.println(sensorpin);
+
+
+    if(x==1)     //this part is for when sensor is activated (when eye is close and receiver receives light by reflection)
+  {
+    flag=1;
+    t1=millis();
+  }
+  else if(x==0)  //this part is for when sensor is not activated (when eye is open and receiver does not receive something)
+  {
+    flag=0;
+    t2=millis();
+    Serial.println(t2-t1);
+    if((t2-t1)>2000) 
+ //when the time difference between eye open and eye close is more than 2  seconds , it would be the case of eye blinking, which sets  the buzzer pin to high and thus the buzzer buzzes
+    {
+      digitalWrite(buzzerpin,HIGH);
+      Serial.println("Alert2!!!!!!!!!!!!!!!!!");
+      int y=digitalRead(sensorpin); //if sensor got activated again(y==1) , it means eye is open , so buzzer stops
+      if(y==1){
+      digitalWrite(buzzerpin,LOW);}
+    }
+    else; 
+  } 
+}
