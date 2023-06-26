@@ -1,2 +1,3 @@
 # Drowsiness-Detection_Device
- A device which alerts the driver through buzzer in  case of Drowsiness.
+ Designed a prototype of Drowsiness Detection and Alerting System for drivers using arduino, eye blink sensor and buzzer.
+ Eye blink sensor of system senses the blink rate. If eyes are found to be closed for more than a certain period of time then the buzzer buzzes and alert the driver.
